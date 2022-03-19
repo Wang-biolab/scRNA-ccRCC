@@ -12,4 +12,12 @@ for(i in 1:length(dir)){
   counts <- Read10X(data.dir = dir[i])
   scRNA <- CreateSeuratObject(counts, project= group[i])
   save(scRNA, file= paste('RawData/scRNA_',group[i],'.Rdata',sep=''))}
+
+
+#合并 seurat 对象
+scRNA <- merge(x = seob_list[[1]], #第一个
+              y = seob_list[-1], #其他的
+              add.cell.ids = names(seob_list) #cell id 添加前缀
+              )
+
   
