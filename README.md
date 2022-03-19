@@ -8,7 +8,7 @@ There are 8 main steps involved in data processing which organized in different 
 ```
 cd "1-ReadData"
 bash download_dataset.sh
-Rscript ReadData.R
+Rscript readDATA.R
 cd ../
 ```
 All samples were obtained from the National Center for Biotechnology Information GEO dataset.Raw data was converted into a Seurat object by R package Seurat (v 3.1.2)
