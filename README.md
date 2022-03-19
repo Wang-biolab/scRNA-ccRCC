@@ -8,8 +8,7 @@ There are () main steps involved in data processing which organized in different
 ```
 cd "1-ReadData"
 bash download_dataset.sh
-Rscript readData_head_neck.R
-Rscript readData_melanoma.R
+Rscript ReadData.R
 cd ../
 ```
 All samples were obtained from the National Center for Biotechnology Information GEO dataset.Raw data was converted into a Seurat object by R package Seurat (v 3.1.2)
@@ -32,15 +31,15 @@ After quality control, the Seurat object was normalized by the function SCTransf
 ## Unsupervised clustering of normalized results
 ```
 cd "4-Clustering"
-Rscript metabolic_landscape.R 
+Rscript clustering.R 
 cd ../
 ```
 We performed principal component analysis (PCA) on an integrated data matrix.And then they were visualized with 2D UMAP plots.
 
 ## Differential expressed genes
 ```
-cd 5-DE
-Rscript TCGA_pathway_activity.R
+cd "5-DE"
+Rscript de.R
 cd ../
 ```
 The differentially expressed genes (DEGs) between pathological tissues (obtained by TCGA website) and normal tissues were initially screened by R software Limma package and EdgeR package.
@@ -49,16 +48,27 @@ The bulk RNA-seq data was downloaded from TCGA website.
 
 ## Pathway and Functional annotation analysis
 ```
-cd 6-PathwayA
-Rscript intra_malignant_heterogeneity.R 
-cd ..
-In this step, the PCA and GSEA analysis will be performed to investigate the metabolic pathway heterogeneity across single cells in malignant and non-malignant cell populations. The scatter plots will be performed to compare activities of OXPHOS, glycolysis and response to hypoxia in single malignant cells and cultured cell lines from CCLE database. The gene signatures in single cells with low OXPHOS/glycolysis/hypoxia activity will be identified and stored as the text files, which can be used as the input of GO analysis on the website: http://metascape.org
+cd "6-PathwayFunctionalAnnotation"
+Rscript pathway.R 
+cd ../
+```
+A gene functional enrichment analysis was performed based on the marker genes in each cell cluster using KEGG pathway enrichment analysis. These differential expressed genes were loaded into clusterProfiler for the GO and KEGG pathway enrichment analysis
 
-Metabolic features of nonmalignant cell subtypes
-cd 7-MetabolicFeatures
-Rscript non-malignant_subtype.R melanoma
-Rscript non-malignant_subtype.R head_neck
-cd ..
-The metabolic features in different T-cell subtypes and fibroblast subtypes will be identified in this step.
+## Single-cell trajectory analysis
+```
+cd 7-TrajectoryAnalysis
+Rscript monocle.R 
+cd ../
+```
+We used the 'monocle 2' for cell trajectory analysis.Based on the ‘DDRTree’ method,the data were reduced to two dimensional, and then, the cells were ordered along the trajectory.
 
-Contact
+## Quantify tumor and normal tissue interactions
+```
+cd 8-CellChat
+Rscript chellchat.R 
+cd ../
+```
+We used CellChat R package to characterize cell-cell communication across all cell types in ccRCC.
+
+## Contact
+yangwang@hubu.edu.cn
