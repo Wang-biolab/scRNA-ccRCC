@@ -2,7 +2,7 @@
 
 ## Introduction
 Data and downstream analysis for 2021 submission "Decoding the Immune Microenvironment of Clear Cell Renal Cell Carcinoma by Single-cell Profiling to Aid Immunotherapy" Yang Wang et. al
-There are 8 main steps involved in data processing which organized in different folders.
+There are 6 main steps involved in data processing which organized in different folders.
 
 ## Download and read the datasets
 ```
@@ -13,16 +13,9 @@ cd ../
 ```
 All samples were obtained from the National Center for Biotechnology Information GEO dataset.Raw data was converted into a Seurat object by R package Seurat (v 3.1.2)
 
-## QC
-```
-cd "2-QC"
-Rscript QC.R 
-cd ../
-```
-
 ## Normalization of upstream analysis results
 ```
-cd "3-Normalization"
+cd "2-Normalization"
 Rscript normalization.R 
 cd ../
 ```
@@ -30,25 +23,16 @@ After quality control, the Seurat object was normalized by the function SCTransf
 
 ## Unsupervised clustering of normalized results
 ```
-cd "4-Clustering"
+cd "3-Clustering"
 Rscript clustering.R 
 cd ../
 ```
 We performed principal component analysis (PCA) on an integrated data matrix.And then they were visualized with 2D UMAP plots.
 
-## Differential expressed genes
-```
-cd "5-DE"
-Rscript de.R
-cd ../
-```
-The differentially expressed genes (DEGs) between pathological tissues (obtained by TCGA website) and normal tissues were initially screened by R software Limma package and EdgeR package.
-
-The bulk RNA-seq data was downloaded from TCGA website.
 
 ## Pathway and Functional annotation analysis
 ```
-cd "6-PathwayFunctionalAnnotation"
+cd "4-PathwayFunctionalAnnotation"
 Rscript pathway.R 
 cd ../
 ```
@@ -56,7 +40,7 @@ A gene functional enrichment analysis was performed based on the marker genes in
 
 ## Single-cell trajectory analysis
 ```
-cd 7-TrajectoryAnalysis
+cd 5-TrajectoryAnalysis
 Rscript monocle.R 
 cd ../
 ```
@@ -64,7 +48,7 @@ We used the 'monocle 2' for cell trajectory analysis.Based on the ‘DDRTree’ 
 
 ## Quantify tumor and normal tissue interactions
 ```
-cd 8-CellChat
+cd 6-CellChat
 Rscript chellchat.R 
 cd ../
 ```
