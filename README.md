@@ -29,26 +29,25 @@ cd ../
 ```
 After quality control, the Seurat object was normalized by the function SCTransform of Seurat package.
 
-## Landscape of the metabolic gene expression profile
+## Unsupervised clustering of normalized results
+```
 cd "4-Clustering"
-Rscript metabolic_landscape.R melanoma
-Rscript metabolic_landscape.R head_neck
-Rscript inter_tumor_distance.R melanoma
-Rscript inter_tumor_distance.R head_neck
+Rscript metabolic_landscape.R 
 cd ../
-The t-SNE algorithm will be performed in this step for visualizing metabolic gene expression in millions of cells (The result may be slightly different with the figure in manuscript due to the random initialization). The spearman correlation matrix will aslo be generated to show the inter-tumor heterogeneity using the metabolic genes.
+```
+We performed principal component analysis (PCA) on an integrated data matrix.And then they were visualized with 2D UMAP plots.
 
-Metabolic pathway activities in different cell types
-cd 5-PathwayActivity
-Rscript scRNA_pathway_activity.R melanoma
-Rscript scRNA_pathway_activity.R head_neck
+## Differential expressed genes
+```
+cd 5-DE
 Rscript TCGA_pathway_activity.R
-cd ..
-This step will calculate the metabolic pathway activities for different single cell populations or bulk tumor/normal samples. The scatter plot will show the discrepancy of pathway activities between single malignant cells and bulk tumors. The violin plot will show the distribution of metabolic pathway activities in single cell populations or bulk tumor/normal samples.
+cd ../
+```
+The differentially expressed genes (DEGs) between pathological tissues (obtained by TCGA website) and normal tissues were initially screened by R software Limma package and EdgeR package.
 
-The bulk RNA-seq data was downloaded from TCGA website, please see the instruction of data downloading and preprocessing in Data/TCGA/README.md
+The bulk RNA-seq data was downloaded from TCGA website.
 
-Metabolic pathway heterogeneity
+## Metabolic pathway heterogeneity
 cd 6-PathwayHeterogeneity
 Rscript intra_malignant_heterogeneity.R melanoma
 Rscript intra_malignant_heterogeneity.R head_neck
