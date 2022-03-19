@@ -7,7 +7,6 @@ There are 6 main steps involved in data processing which organized in different 
 ## Download and read the datasets
 ```
 cd "1-ReadData"
-bash download_dataset.sh
 Rscript readDATA.R
 cd ../
 ```
